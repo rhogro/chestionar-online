@@ -1,0 +1,36 @@
+table {
+    width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    position: relative;
+    left: 20px;
+}
+
+    table tr td table {
+        width: 100%;
+        border-collapse: collapse;
+        border-style: hidden;
+    }
+
+        table tr td table td {
+            border: 1px solid gray;
+        }
+
+        table tr td table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+.dunga {
+    border-right: 2px solid cadetblue;
+}
+
+.heading {
+    font-size:large;
+    color: cadetblue;
+    text-align:left;
+}
