@@ -7,13 +7,16 @@ require_once 'inc/vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
 
-function decode($jwt, $key){
-    $decoded = JWT::decode($jwt, $key, array('HS256'));
+function decode($jwt){
+    $decoded = JWT::decode($jwt, "rhogro", array('HS256'));
     $id = $decoded->id;
     $accType = $decoded->accType;
     $username = $decoded->username;
-
-    echo "<br>username: ".$username."<br>account type: ".$accType;  
     return $decoded;  
+}
+
+function decodeCookie(){
+    $jwt = $_COOKIE["token"];
+    return decode($jwt);
 }
 ?>
