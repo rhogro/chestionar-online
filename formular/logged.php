@@ -13,6 +13,9 @@
         $user = decodeCookie();
         if($user->accType == "creator"){
             echo "Welcome creator ".$user->username."<br>\n";
+
+            echo "<a href=newForm.php> Create new form </a> <br>\n";
+
             echo "<table>
             \n\t <caption> Your Forms </caption>
             \n </table>";
