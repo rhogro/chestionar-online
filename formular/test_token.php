@@ -19,10 +19,7 @@ use \Firebase\JWT\JWT;
 	$tokenVal = validJWT($_COOKIE["token"]);
  
 	// check if the first array value is true
-	if ($tokenVal['0']) {
-		// create user session and all that good stuff
-			
-	} else {
+	if (!$tokenVal['0']) {
         header("Location: localhost/login.html");
 	    die();
 	}

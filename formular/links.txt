@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/16104078/appending-array-to-formdata-and-send-via-ajax
+http://blog.teamtreehouse.com/create-ajax-contact-form
+http://formvalidation.io/examples/ajax-submit/
