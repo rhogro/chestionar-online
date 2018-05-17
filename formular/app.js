@@ -11,31 +11,36 @@ $(function() {
         event.preventDefault();
 
         // Serialize the form data.
-        var formData = $(form).serialize();
         // Submit the form using AJAX.
+        var formData = $(form).serializeArray();
+        var parsedData = formData.reduce(function(acc, input) {
+            if (input.name.indexOf("question") > -1 && input.name !== "questionNumber") {
+                var questionId = input.name.split('-')[1];
+                var question = Object.assign({}, input);
+                question.answers = [];
+                acc[questionId] = question;
+            }
+            else if(input.name.indexOf("answer") > -1 && input.name !== "questionNumber") {
+                var questionId = input.name.split('-')[1];
+                acc[questionId].answers.push(input)
+            }
+            return acc;
+        }, {});
+        var formName = formData[0].value;
         $.ajax({
             type: 'POST',
-            url: $(form).attr('action'),
-            data: formData
+            url: "newForm_handler.php",
+            data: {
+                formName: formName,
+                data: JSON.stringify(parsedData)
+            }
         })
         .done(function(response) {
-            // Make sure that the formMessages div has the 'success' class.
-            $(formMessages).removeClass('error');
-            $(formMessages).addClass('success');
-        
             // Set the message text.
             $(formMessages).text(response);
         
-            // Clear the form.
-            $('#name').val('');
-            $('#email').val('');
-            $('#message').val('');
         })
         .fail(function(data) {
-            // Make sure that the formMessages div has the 'error' class.
-            $(formMessages).removeClass('success');
-            $(formMessages).addClass('error');
-        
             // Set the message text.
             if (data.responseText !== '') {
                 $(formMessages).text(data.responseText);

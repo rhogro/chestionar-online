@@ -12,7 +12,7 @@ require 'test_token.php';
     <script type='text/javascript'>
         function addFields(){
             // Number of inputs to create
-            var number = parseInt(document.getElementById("questionNumber").value);
+            var number = parseInt(document.getElementById("q-count").value);
             // Container <div> where dynamic content will be placed
             var container = document.getElementById("container");
             // Clear previous contents of the container
@@ -26,7 +26,7 @@ require 'test_token.php';
                 // Create an <input> element, set its type and name attributes
                 var input = document.createElement("input");
                 input.type = "text";
-                input.name = "question" + i;
+                input.name = "question-" + i;
                 container.appendChild(input);
                 var btn = document.createElement("BUTTON");        // Create a <button> element
                 btn.setAttribute('type', 'button');
@@ -51,7 +51,7 @@ require 'test_token.php';
             // Create an <input> element, set its type and name attributes
             var input = document.createElement("input");
             input.type = "text";
-            input.name = "answer" + i;
+            input.name = "answer-" + i;
             container.appendChild(input);
         }
     </script>
@@ -70,7 +70,7 @@ require 'test_token.php';
             <tr>
                 <td> Number of questions: </td>
                 <td>
-                    <input type="text" id="questionNumber" name="questionNumber">
+                    <input type="text" id="q-count" name="questionNumber">
                 </td>
             </tr>
             <tr>
