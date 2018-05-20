@@ -46,13 +46,24 @@ require 'test_token.php';
         function addAnswers(i){
             var container = document.getElementById("answerContainer"+i);
             var para = document.createElement("p"); // Create a <p> element
-            para.appendChild(document.createTextNode("Answer "));
             container.appendChild(para);
+            container.appendChild(document.createTextNode("Answer: "));
             // Create an <input> element, set its type and name attributes
             var input = document.createElement("input");
             input.type = "text";
             input.name = "answer-" + i;
             container.appendChild(input);
+            var chkBox = document.createElement("input");
+            chkBox.setAttribute("type", "checkbox");
+            chkBox.setAttribute("name", "correct-"+i);
+            var label = document.createTextNode("Correct:");
+            container.appendChild(label);
+            container.appendChild(chkBox);
+
+            var childCount = container.children.length / 3;  // three elements in this div
+
+            chkBox.setAttribute("id", childCount);
+            input.setAttribute("id", childCount);
         }
     </script>
 </head>
@@ -72,6 +83,14 @@ require 'test_token.php';
                 <td>
                     <input type="text" id="q-count" name="questionNumber">
                 </td>
+            </tr>
+            <tr>
+            <td> 
+                <input type="radio" name="visibility" value="public" checked> Public
+             </td>
+             <td>
+                <input type="radio" name="visibility" value="private"> Private
+             </td>
             </tr>
             <tr>
                 <td colspan=2>

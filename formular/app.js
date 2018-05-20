@@ -18,20 +18,24 @@ $(function() {
                 var questionId = input.name.split('-')[1];
                 var question = Object.assign({}, input);
                 question.answers = [];
+                
                 acc[questionId] = question;
             }
             else if(input.name.indexOf("answer") > -1 && input.name !== "questionNumber") {
+                var x = input.id;
                 var questionId = input.name.split('-')[1];
                 acc[questionId].answers.push(input)
             }
             return acc;
         }, {});
         var formName = formData[0].value;
+        var visibility = formData[2].value;
         $.ajax({
             type: 'POST',
             url: "newForm_handler.php",
             data: {
                 formName: formName,
+                visibility: visibility,
                 data: JSON.stringify(parsedData)
             }
         })

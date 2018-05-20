@@ -29,7 +29,8 @@
 // Only process POST reqeusts.
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
     $formName = $_POST['formName'];
-    var_dump($formName);
+    $visibility = $_POST['visibility'];
+    var_dump($visibility);
     $data = $_POST['data'];
     $data = json_decode($data);
     foreach($data as $questionId => $questionData) {
