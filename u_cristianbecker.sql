@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: May 14, 2018 at 08:18 PM
+-- Generation Time: May 22, 2018 at 06:23 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -31,8 +31,9 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `answers`;
 CREATE TABLE IF NOT EXISTS `answers` (
   `answer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `text` varchar(500) NOT NULL,
+  `text` varchar(100) NOT NULL,
   `question_id` int(11) NOT NULL,
+  `correct` varchar(10) NOT NULL,
   PRIMARY KEY (`answer_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -45,19 +46,11 @@ CREATE TABLE IF NOT EXISTS `answers` (
 DROP TABLE IF EXISTS `forms`;
 CREATE TABLE IF NOT EXISTS `forms` (
   `form_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `name` varchar(20) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `visibility` varchar(10) NOT NULL,
   PRIMARY KEY (`form_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `forms`
---
-
-INSERT INTO `forms` (`form_id`, `name`, `user_id`) VALUES
-(1, 'my first form', 1),
-(2, 'First form', 1),
-(3, 'First form2', 1);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -82,12 +75,12 @@ CREATE TABLE IF NOT EXISTS `questions` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `email` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `password` varchar(60) CHARACTER SET utf8 NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `accType` varchar(10) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`

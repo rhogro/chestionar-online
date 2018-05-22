@@ -28,6 +28,7 @@ $(function() {
             }
             return acc;
         }, {});
+        
         var formName = formData[0].value;
         var visibility = formData[2].value;
         $.ajax({
