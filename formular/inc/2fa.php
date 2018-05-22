@@ -20,13 +20,15 @@ class userAuth {
 	private function validUser($username, $password) {
 		global $conexiune;
 		// doing a user exists check with minimal to no validation on user input
-		$query = mysqli_query($conexiune, "SELECT * FROM users WHERE username ='$username' AND password = '$password'");
-		$res=mysqli_fetch_assoc($query);
-		if($res){
+		$sql = $conexiune->prepare("SELECT id, username, accType FROM users WHERE username = ? AND password = ?");
+		$sql->bind_param("ss", $username, $password);
+		$sql->execute();
+		$sql->bind_result($rez_id, $rez_username, $rez_accType);
+		if($sql->fetch()){
 			// Add user username and id and type to empty username and id variable and return true
-			$this->id = $res['id'];
-			$this->username = $res['username'];
-			$this->accType = $res['accType'];
+			$this->id = $rez_id;
+			$this->username = $rez_username;
+			$this->accType = $rez_accType;
     
 			return true;
 		} else {

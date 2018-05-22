@@ -12,21 +12,29 @@
 				$password2=sha1($_POST['password2']);
 				$accType=$_POST['accType'];
 				
-				$res_u = mysqli_query($conexiune, "SELECT * FROM users WHERE username='$username'");
-				$res_e = mysqli_query($conexiune, "SELECT * FROM users WHERE email='$email'");
+				$sql = $conexiune->prepare("SELECT username FROM users WHERE username = ?");
+				$sql->bind_param("s", $username);
+				$sql->execute();
+				$sql->bind_result($rez_username);
 
-				if(mysqli_num_rows($res_u) > 0) {
+				$sql = $conexiune->prepare("SELECT * FROM users WHERE email = ?");
+				$sql->bind_param("s", $email);
+				$sql->execute();
+				$sql->bind_result($rez_email);
+
+				if(mysqli_num_rows($rez_username) > 0) {
 					echo "Sorry... username already taken";
 					$name_error = "Sorry... username already taken"; 	
-				}else if(mysqli_num_rows($res_e) > 0){
+				}else if(mysqli_num_rows($res_email) > 0){
 					echo "A user already registered with this email address";
 					$email_error = "Sorry... email already taken"; 	
 				}else if($password != $password2){
 					echo "Password and verification password don't match!";
 				}else{
-					$query = mysqli_query($conexiune, "INSERT INTO users (username, email, password, accType) 
-						VALUES ('$username', '$email', '$password', '$accType')");
-					if($query){
+					$sql = $conexiune->prepare("INSERT INTO users (username, email, password, accType) 
+						VALUES (?, ?, ?, ?)");
+					$sql->bind_param("ssss",$username, $email, $password, $accType);
+					if($sql->execute()){
 						echo 'Account created!<br>';
 					}
 					
